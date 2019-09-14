@@ -1,0 +1,6 @@
+CREATE TABLE Competicao (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome varchar (70) NOT NULL,
+    descricao VARCHAR(110) NOT NULL,
+    data DATETIME NOT NULL
+);

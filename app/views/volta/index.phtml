@@ -1,0 +1,77 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+    <h1>
+        Search volta
+    </h1>
+    <p>
+        <?php echo $this->tag->linkTo(["volta/new", "Create volta"]) ?>
+    </p>
+</div>
+
+<?php echo $this->getContent() ?>
+
+<?php
+    echo $this->tag->form(
+        [
+            "volta/search",
+            "autocomplete" => "off",
+            "class" => "form-horizontal"
+        ]
+    );
+?>
+
+<div class="form-group">
+    <label for="fieldId" class="col-sm-2 control-label">Id</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIdCompeticao" class="col-sm-2 control-label">Id Of Competicao</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id_competicao", "type" => "number", "class" => "form-control", "id" => "fieldIdCompeticao"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIdCompetidor" class="col-sm-2 control-label">Id Of Competidor</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id_competidor", "type" => "number", "class" => "form-control", "id" => "fieldIdCompetidor"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldValida" class="col-sm-2 control-label">Valida</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["valida", "type" => "number", "class" => "form-control", "id" => "fieldValida"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldTempo" class="col-sm-2 control-label">Tempo</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["tempo", "size" => 30, "class" => "form-control", "id" => "fieldTempo"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldData" class="col-sm-2 control-label">Data</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["data", "size" => 30, "class" => "form-control", "id" => "fieldData"]) ?>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>

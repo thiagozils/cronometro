@@ -59,7 +59,10 @@ class CompetidorController extends ControllerBase
     {
         $competidor = Competidor::find();
         $this->response->setContentType('application/json', 'UTF-8');
-        return $this->response->setJsonContent($competidor->toArray())->send();
+        return $this->response
+        ->setHeader('Content-Type', 'application/json')
+        ->setJsonContent($competidor->toArray(),JSON_PRETTY_PRINT, 512)
+        ->send();
         //echo json_encode(Competidor::find($parameters)->toArray(), JSON_NUMERIC_CHECK);
     }
 

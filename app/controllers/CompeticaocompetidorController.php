@@ -2,7 +2,7 @@
  
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-
+use Cronometro\Models;
 
 class CompeticaocompetidorController extends ControllerBase
 {
@@ -106,9 +106,10 @@ class CompeticaocompetidorController extends ControllerBase
         }
 
         $competicaocompetidor = new Competicaocompetidor();
-        $competicaocompetidor->idCompeticao = $this->request->getPost("id_competicao");
-        $competicaocompetidor->idCompetidor = $this->request->getPost("id_competidor");
-        
+        $competidor = Competidor::findFirst($this->request->getPost("id_competidor"));
+        $competicao = Competicao::findFirst($this->request->getPost("id_competicao"));
+        $competicaocompetidor->id_competicao =  $competicao->id;
+        $competicaocompetidor->id_competidor = $competidor->id;
 
         if (!$competicaocompetidor->save()) {
             foreach ($competicaocompetidor->getMessages() as $message) {

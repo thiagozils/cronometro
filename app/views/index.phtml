@@ -5,22 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>TCC</title>
+        <title>Cronômetro</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://use.fontawesome.com/e9c09e0601.js"></script>
         <?php 
-                $this->assets->addCss('css/styles.css');
-                $this->assets->addJs('js/script.js');
-                $this->assets->outputCss(); 
-                $this->assets->outputJs();
+              $this->assets->addCss('public/css/styles.css');
+              $this->assets->addJs('public/js/script.js');
+              $this->assets->addJs('public/js/jquery.mask.min.js');
+              $this->assets->outputCss(); 
+              $this->assets->outputJs();
          ?>
     </head>
     <body>
 
 
-
+  
     <div id="wrapper">
         <div class="overlay"></div>
         <!-- Sidebar -->
@@ -52,7 +54,7 @@
                     );?>
                 </li>
                 </li>
-            </ul>
+            </ul> 
         </nav>
         <!-- /#sidebar-wrapper -->
 
@@ -65,7 +67,7 @@
             </button>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">                       
+                    <div class="col-lg-8 col-lg-offset-2">                      
                         <?php echo $this->getContent(); ?>
                     </div>
                 </div>

@@ -4,8 +4,8 @@
  */
 ?>
 
+<h2 class="indexTitle"><b> COMPETIÇÃO</b></h2>
 <div class="page-header">
-
 <?php
     echo $this->tag->form(
         [
@@ -18,25 +18,25 @@
 
 <div class="wrap">
    <div class="search">
-      <input type="text" class="searchTerm" placeholder="Buscar competição" id="fieldNome">
+      <input type="text" class="searchTerm" placeholder="Buscar" id="fieldNome">
       <button type="submit" class="searchButton">
         <i class="fa fa-search"></i>
      </button>
    </div>
 </div>
 <!-- fieldData -->
-
+   <?php echo $this->getContent() ?>
 <?php echo $this->tag->endForm(); ?>
 
-
-    <p>
-        <?php echo $this->tag->linkTo(["competicao/new", "Create competicao"]) ?>
-    </p>
 </div>
+    
+    <p>
+         <?php echo $this->tag->linkTo(["competicao/new","class" => "btn btn-primary btn-lg", "+"]) ?>
+    </p>
+   
 
 
-<div class="row">
-    <?php echo $this->getContent() ?>
+
 </div>
 
 

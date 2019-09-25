@@ -35,7 +35,7 @@ class CompeticaoController extends ControllerBase
 
         $competicao = Competicao::find($parameters);
         if (count($competicao) == 0) {
-            $this->flash->notice("The search did not find any competicao");
+            $this->flash->notice("Não foi encontrado nenhum registro!");
 
             $this->dispatcher->forward([
                 "controller" => "competicao",
@@ -73,7 +73,7 @@ class CompeticaoController extends ControllerBase
 
             $competicao = Competicao::findFirstByid($id);
             if (!$competicao) {
-                $this->flash->error("competicao was not found");
+                $this->flash->error("Competição não econtrada");
 
                 $this->dispatcher->forward([
                     'controller' => "competicao",
@@ -106,13 +106,14 @@ class CompeticaoController extends ControllerBase
 
             return;
         }
-
+        date_default_timezone_set(date_default_timezone_get());
         $competicao = new Competicao();
+       $date_convert = date_create_from_format('d/m/Y:H:i:s', $this->request->getPost("data") . ":00");   
+       $date = new DateTime($date_convert);
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
-        $competicao->data = $this->request->getPost("data");
-        
-
+        $competicao->data = date_format($date,'Y-m-d H:i:s');
+               
         if (!$competicao->save()) {
             foreach ($competicao->getMessages() as $message) {
                 $this->flash->error($message);
@@ -126,7 +127,7 @@ class CompeticaoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("competicao was created successfully");
+        $this->flash->success("Competição criada com sucesso!");
 
         $this->dispatcher->forward([
             'controller' => "competicao",
@@ -154,7 +155,7 @@ class CompeticaoController extends ControllerBase
         $competicao = Competicao::findFirstByid($id);
 
         if (!$competicao) {
-            $this->flash->error("competicao does not exist " . $id);
+            $this->flash->error("Competição não existente " . $id);
 
             $this->dispatcher->forward([
                 'controller' => "competicao",
@@ -166,9 +167,9 @@ class CompeticaoController extends ControllerBase
 
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
-        $competicao->data = $this->request->getPost("data");
+        $competicao->data = date_format($this->request->getPost("data"),'Y-m-d H:i:s');
         
-
+echo $competicao->data;
         if (!$competicao->save()) {
 
             foreach ($competicao->getMessages() as $message) {

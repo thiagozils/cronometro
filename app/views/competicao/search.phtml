@@ -7,44 +7,19 @@
 <?php use Phalcon\Tag; ?>
 <?php echo $this->getContent(); ?>
 
-<style>
-.demo-card-square.mdl-card {
-  width: 320px;
-  height: 320px;
-  margin-left: 3%;
-  margin-top: 3%;
-}
-.demo-card-square > .mdl-card__title {
-  color: #fff;
-  background: url('img\trophy.png') bottom right 15% no-repeat #A61D3E;
-}
-</style>
-
-
-
 
 
 <div class="row">
 
         <?php foreach ($page->items as $competicao): ?>
-
-
-        <div class="demo-card-square mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-            <h2 class="mdl-card__title-text"><?php echo $competicao->nome ?></h2>
-            <img src="../public/img/trophy.png">
-        </div>
-        <div class="mdl-card__supporting-text">
-        <?php echo $competicao->data ?>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-           <?php //echo $this->tag->linkTo(["competicao/edit/" . $competicao->id, "Edit"]); ?>
-            <?php //echo $this->tag->linkTo(["competicao/delete/" . $competicao->id, "Delete"]); ?>
-         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-            Mais
-            </a>
-        </div>
-        </div>
+            <div class="card">
+            <h3 class="card-header"><?php echo $competicao->nome ?></h3>
+            <div class="card-body">
+                <h5 class="card-title"> <?php echo $competicao->data ?></h5>
+                <p class="card-text"> <?php echo $competicao->descricao ?></p>
+                <a href="#" class="btn btn-primary">Ver mais</a>
+                </div>
+            </div>
         <?php endforeach; ?>
 
 </div>

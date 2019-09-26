@@ -106,13 +106,17 @@ class CompeticaoController extends ControllerBase
 
             return;
         }
-        date_default_timezone_set(date_default_timezone_get());
+    
         $competicao = new Competicao();
-       $date_convert = date_create_from_format('d/m/Y:H:i:s', $this->request->getPost("data") . ":00");   
-       $date = new DateTime($date_convert);
+
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
-        $competicao->data = date_format($date,'Y-m-d H:i:s');
+
+        //CONVERTE A DATA PARA O FORMATO CORRETO
+        $dateString = $this->request->getPost("data") . ":00";   
+        $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
+        $newdate = $myDateTime->format('Y/m/d H:i:s');
+        $competicao->data = $newdate;
                
         if (!$competicao->save()) {
             foreach ($competicao->getMessages() as $message) {
@@ -167,7 +171,13 @@ class CompeticaoController extends ControllerBase
 
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
-        $competicao->data = date_format($this->request->getPost("data"),'Y-m-d H:i:s');
+        
+        //CONVERTE A DATA PARA O FORMATO CORRETO
+        $dateString = $this->request->getPost("data") . ":00";   
+        $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
+        $newdate = $myDateTime->format('Y/m/d H:i:s');
+        $competicao->data = $newdate;
+                       
         
 echo $competicao->data;
         if (!$competicao->save()) {

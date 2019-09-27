@@ -17,6 +17,7 @@ $( document ).ready(function() {
 
     $('.searchable').multiSelect({
   selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Pesquisar'>",
+  selectionHeader: "<h4 class='search-input'> Selecionados </h4>",
   afterInit: function(ms){
     var that = this,
         $selectableSearch = that.$selectableUl.prev(),
@@ -85,7 +86,6 @@ $( document ).ready(function() {
     <label for="fieldNome">Nome</label>
         <?php echo $this->tag->textField(["nome", "size" => 30, "class" => "form-control", "id" => "fieldNome"]) ?>
 </div>
-
 
 <div class="form-group">
     <label for="fieldDescricao">Descrição</label>

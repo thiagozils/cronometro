@@ -108,9 +108,11 @@ class CompeticaoController extends ControllerBase
             return;
         }
     
+        $competidores = $this->request->getPost("competidores");
+
         $competicao = new Competicao();
 
-        $competicao->nome = $this->request->getPost("nome");
+        $competicao->nome = $this->request->getPost("nome") . $competidores;
         $competicao->descricao = $this->request->getPost("descricao");
 
         //CONVERTE A DATA PARA O FORMATO CORRETO
@@ -118,6 +120,10 @@ class CompeticaoController extends ControllerBase
         $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
         $newdate = $myDateTime->format('Y/m/d H:i:s');
         $competicao->data = $newdate;
+
+
+        
+        
                
         if (!$competicao->save()) {
             foreach ($competicao->getMessages() as $message) {

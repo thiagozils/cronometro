@@ -59,7 +59,8 @@ class CompeticaoController extends ControllerBase
      */
     public function newAction()
     {
-
+        $competidores = Competidor::find();
+        $this->view->competidores = $competidores;
     }
 
     /**

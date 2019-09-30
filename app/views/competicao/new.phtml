@@ -41,17 +41,22 @@ $( document ).ready(function() {
       }
     });
   },
-  afterSelect: function(){
+  afterSelect: function(values){
     this.qs1.cache();
     this.qs2.cache();
+       $("#competidores").val($("#competidores").val() + values +",");
   },
-  afterDeselect: function(){
+  afterDeselect: function(values){
     this.qs1.cache();
     this.qs2.cache();
+    $("#competidores").val( $("#competidores").val().toString().replace(values+",", '') );
+      //alert("Deselect value: "+values);
   }
 });
 
 });
+
+
 
 
 </script>
@@ -60,7 +65,7 @@ $( document ).ready(function() {
 <h2>
     <b> CRIAR COMPETIÇÃO</b>
     <?php echo $this->tag->linkTo(["competicao","class" => "back", "Voltar" ]) ?>
-
+ 
 </h2>
 </div>
 
@@ -102,7 +107,7 @@ $( document ).ready(function() {
     </select>
 </div>
 
-    <input type="hidden" value="COMPETIDORES" name="competidores" id="competidores">
+    <input type="hidden" value="" name="competidores" id="competidores">
 
 <div class="form-group">
     <?php echo $this->tag->submitButton(["Criar", "class" => "btn btn-primary btn-lg"]) ?>

@@ -109,9 +109,14 @@ class CompeticaoController extends ControllerBase
         }
     
         $competicao = new Competicao();
-        $competidores = $this->request->getPost("competidores");
         $competicao->nome = $this->request->getPost("nome") . " " . $competidores;
         $competicao->descricao = $this->request->getPost("descricao");
+
+        $competidor = $this->request->getPost("competidores");
+        $competidores = explode(",", $competidor);
+
+
+
 
         try {
             //CONVERTE A DATA PARA O FORMATO CORRETO

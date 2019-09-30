@@ -6,45 +6,41 @@
 
 <?php use Phalcon\Tag; ?>
 
-<div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous"><?php echo $this->tag->linkTo(["competidor/index", "Go Back"]); ?></li>
-            <li class="next"><?php echo $this->tag->linkTo(["competidor/new", "Create "]); ?></li>
-        </ul>
-    </nav>
-</div>
-
 <div class="page-header">
-    <h1>Search result</h1>
+<h2>
+    <b>Resultado da busca:</b>
+    <?php echo $this->tag->linkTo(["competidor","class" => "back", "Voltar" ]) ?>
+
+</h2>
 </div>
 
 <?php echo $this->getContent(); ?>
 
-<div class="row">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-            <th>Nome</th>
 
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+
         <?php foreach ($page->items as $competidor): ?>
-            <tr>
-                <td><?php echo $competidor->id ?></td>
-            <td><?php echo $competidor->nome ?></td>
 
-                <td><?php echo $this->tag->linkTo(["competidor/edit/" . $competidor->id, "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["competidor/delete/" . $competidor->id, "Delete"]); ?></td>
-            </tr>
+
+        <div class="row">
+        <div class="col-lg-5">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object dp img-circle" src="../public/img/account.png" style="width: 100px;height:100px;">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><b><?php echo $competidor->id ?></b> - <?php echo $competidor->nome ?></h4>
+ 
+                <hr style="margin:8px auto">
+
+                <?php echo $this->tag->linkTo(["competidor/edit/" . $competidor->id, "Editar", "class" => "btn btn-primary"]); ?>
+                <?php echo $this->tag->linkTo(["competidor/delete/" . $competidor->id, "Deletar", "class" => "btn btn-primary"]); ?>
+            </div>
+        </div>
+    </div>
+    </div>
         <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+
+
 
 <div class="row">
     <div class="col-sm-1">

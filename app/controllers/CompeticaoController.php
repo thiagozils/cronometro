@@ -109,13 +109,11 @@ class CompeticaoController extends ControllerBase
         }
     
         $competicao = new Competicao();
-        $competicao->nome = $this->request->getPost("nome") . " " . $competidores;
+        $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
 
         $competidor = $this->request->getPost("competidores");
         $competidores = explode(",", $competidor);
-
-
 
 
         try {
@@ -143,6 +141,13 @@ class CompeticaoController extends ControllerBase
         }
 
         $this->flash->success("Competição criada com sucesso!");
+
+        foreach ($competidores as &$value) {
+            $compc = new Competicaocompetidor();
+            $compc->id_competicao = $competicao->id;
+            $compc->id_competidor = $value;
+            $compc->save();
+        }
 
         $this->dispatcher->forward([
             'controller' => "competicao",

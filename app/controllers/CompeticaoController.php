@@ -108,23 +108,22 @@ class CompeticaoController extends ControllerBase
             return;
         }
     
-        $competidores = $this->request->getPost("competidores");
-
         $competicao = new Competicao();
-
-        $competicao->nome = $this->request->getPost("nome") . $competidores;
+        $competidores = $this->request->getPost("competidores");
+        $competicao->nome = $this->request->getPost("nome") . " " . $competidores;
         $competicao->descricao = $this->request->getPost("descricao");
 
-        //CONVERTE A DATA PARA O FORMATO CORRETO
-        $dateString = $this->request->getPost("data") . ":00";   
-        $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
-        $newdate = $myDateTime->format('Y/m/d H:i:s');
-        $competicao->data = $newdate;
+        try {
+            //CONVERTE A DATA PARA O FORMATO CORRETO
+            $dateString = $this->request->getPost("data") . ":00";   
+            $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
+            $newdate = $myDateTime->format('Y/m/d H:i:s');
+            $competicao->data = $newdate;
+        }catch (Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+           // $competicao->data = $this->request->getPost("data");
+        }
 
-
-        
-        
-               
         if (!$competicao->save()) {
             foreach ($competicao->getMessages() as $message) {
                 $this->flash->error($message);

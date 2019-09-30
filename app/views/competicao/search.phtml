@@ -5,6 +5,14 @@
 ?>
 
 <?php use Phalcon\Tag; ?>
+
+<div class="page-header">
+<h2>
+    <b>Resultado da busca:</b>
+    <?php echo $this->tag->linkTo(["competicao","class" => "back", "Voltar" ]) ?>
+
+</h2>
+</div>
 <?php echo $this->getContent(); ?>
 
 
@@ -12,14 +20,16 @@
 <div class="row">
 
         <?php foreach ($page->items as $competicao): ?>
-            <div class="card">
-            <h3 class="card-header"><?php echo $competicao->nome ?></h3>
-            <div class="card-body">
-                <h5 class="card-title"> <?php echo $competicao->data ?></h5>
-                <p class="card-text"> <?php echo $competicao->descricao ?></p>
-                <a href="#" class="btn btn-primary">Ver mais</a>
-                </div>
+        <div class="col-sm-4 col-md-4 col-lg-6">
+            <div class="thumbnail">
+            <div class="caption">
+                <h3><?php echo $competicao->nome ?></h3>
+                <h5><b>Data:</b> <?php echo $competicao->data ?></h5>
+                <p><?php echo $competicao->descricao ?></p>
+                <p><a href="#" class="btn btn-primary" role="button">Ver mais</a></p>
             </div>
+            </div>
+        </div>
         <?php endforeach; ?>
 
 </div>
@@ -42,13 +52,5 @@
     </div>
 </div>
 
-<div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous"><?php echo $this->tag->linkTo(["competicao/index", "Go Back"]); ?></li>
-            <li class="next"><?php echo $this->tag->linkTo(["competicao/new", "Create "]); ?></li>
-        </ul>
-    </nav>
-</div>
 
 

@@ -370,17 +370,21 @@ color: #525151;
 
 .form-horizontal{
   margin-left:10px;
-  margin-right10px;
+  margin-right:10px;
 }
 
 .search-input{
   margin-bottom :15px;
 }
 
-.logo{
-  color:#A61D3E;
+.pagination>li>a, .pagination>li>span{
+  background-color: #e8e0e0; 
+  border-color: #e8e0e0; 
+  color:#000;
 }
 
-.logo:hover{
-  color:#FDCD81;
+.pagination>li>a:hover, .pagination>li>span:hover{
+  background-color: #000; 
+  border-color: #000; 
+  color:#ccc;
 }

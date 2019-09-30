@@ -51,10 +51,6 @@ $( document ).ready(function() {
   }
 });
 
-
-
-
-
 });
 
 
@@ -99,12 +95,15 @@ $( document ).ready(function() {
 
 <div class="form-group">
     <label for="my-select[]" >Competidores</label>
-    <select multiple="multiple" id='custom-headers' name="competidores" class="searchable">
+    <select multiple="multiple" id='custom-headers'  class="searchable">
         <?php foreach ($competidores as $competidor): ?>
             <option value="<?php echo $competidor->id ?>"><?php echo $competidor->nome ?></option>
         <?php endforeach; ?>
     </select>
 </div>
+
+    <input type="hidden" value="COMPETIDORES" name="competidores" id="competidores">
+
 <div class="form-group">
     <?php echo $this->tag->submitButton(["Criar", "class" => "btn btn-primary btn-lg"]) ?>
 </div>

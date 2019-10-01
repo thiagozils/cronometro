@@ -50,10 +50,10 @@
     <div class="col-sm-11">
         <nav>
             <ul class="pagination">
-                <li><?php echo $this->tag->linkTo(["competidor/search", "First", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->before, "Previous", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->next, "Next", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->last, "Last", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competidor/search", "Primeira", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->before, "Anterior", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->next, "Próxima", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competidor/search?page=" . $page->last, "Última", 'class' => 'page-link']) ?></li>
             </ul>
         </nav>
     </div>

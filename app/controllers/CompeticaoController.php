@@ -276,6 +276,8 @@ class CompeticaoController extends ControllerBase
             }
 
             $this->view->competicao = $competicao;
+
+            $compc = Competicaocompetidor::findFirstByid($id);
             
         }
 

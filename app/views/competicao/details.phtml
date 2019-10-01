@@ -4,11 +4,28 @@
  */
 ?>
 
-<div class="page-header">
-<h2>
-    <b><?php echo $competicao->nome ?></b>
-</h2>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1><b><?php echo $competicao->nome ?></b></h1>
+    <p><b>Data: </b><?php echo $competicao->data ?></p>
+    <p><?php echo $competicao->descricao ?></p>
+  </div>
 </div>
+
+
+<div class="container">
+<h2> Competidores </h2>
+    <ul class="list-group">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+</div>
+
+
 
 
 <?php echo $this->getContent(); ?>

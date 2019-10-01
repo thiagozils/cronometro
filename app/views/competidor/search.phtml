@@ -29,15 +29,14 @@
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><b><?php echo $competidor->id ?></b> - <?php echo $competidor->nome ?></h4>
- 
                 <hr style="margin:8px auto">
-
                 <?php echo $this->tag->linkTo(["competidor/edit/" . $competidor->id, "Editar", "class" => "btn btn-primary"]); ?>
                 <?php echo $this->tag->linkTo(["competidor/delete/" . $competidor->id, "Deletar", "class" => "btn btn-primary"]); ?>
             </div>
         </div>
     </div>
     </div>
+    <hr style="margin:8px auto">
         <?php endforeach; ?>
 
 

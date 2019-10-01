@@ -10,7 +10,9 @@ $router->add("/competidor/searchJson", array(
     'action' => 'searchjson'
 ));
 
-
-
+$router->add("/competicao/details/{id}", array(
+    'controller' => 'competicao',
+    'action' => 'details'
+));
 
 $router->handle();

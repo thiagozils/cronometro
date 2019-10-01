@@ -194,8 +194,6 @@ class CompeticaoController extends ControllerBase
         $newdate = $myDateTime->format('Y/m/d H:i:s');
         $competicao->data = $newdate;
                        
-        
-echo $competicao->data;
         if (!$competicao->save()) {
 
             foreach ($competicao->getMessages() as $message) {
@@ -260,4 +258,29 @@ echo $competicao->data;
         ]);
     }
 
+
+    public function detailsAction($id){
+
+        if (!$this->request->isPost()) {
+
+            $competicao = Competicao::findFirstByid($id);
+            if (!$competicao) {
+                $this->flash->error("Erro ao buscar");
+
+                $this->dispatcher->forward([
+                    'controller' => "competicao",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+
+            $this->view->competicao = $competicao;
+            
+        }
+
+    }
+
+
 }
+

@@ -26,7 +26,7 @@
                 <h3><?php echo $competicao->nome ?></h3>
                 <h5><b>Data:</b> <?php echo $competicao->data ?></h5>
                 <p><?php echo $competicao->descricao ?></p>
-                <p><a href="#" class="btn btn-primary" role="button">Ver mais</a></p>
+                <p><?php echo $this->tag->linkTo(["competicao/details/" . $competicao->id, "Ver mais", "class" => "btn btn-primary"]); ?></p>
             </div>
             </div>
         </div>
@@ -43,10 +43,10 @@
     <div class="col-sm-11">
         <nav>
             <ul class="pagination">
-                <li><?php echo $this->tag->linkTo(["competicao/search", "First", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->before, "Previous", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->next, "Next", 'class' => 'page-link']) ?></li>
-                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->last, "Last", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competicao/search", "Primeira", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->before, "Anterior", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->next, "Próxima", 'class' => 'page-link']) ?></li>
+                <li><?php echo $this->tag->linkTo(["competicao/search?page=" . $page->last, "Última", 'class' => 'page-link']) ?></li>
             </ul>
         </nav>
     </div>

@@ -32,7 +32,7 @@ class CompeticaoController extends ControllerBase
             $parameters = [];
         }
         $parameters["order"] = "id";
-
+      
         $competicao = Competicao::find($parameters);
         if (count($competicao) == 0) {
             $this->flash->notice("Não foi encontrado nenhum registro!");
@@ -277,8 +277,10 @@ class CompeticaoController extends ControllerBase
 
             $this->view->competicao = $competicao;
 
-            $compc = Competicaocompetidor::findFirstByid($id);
-            
+            $query = $this->modelsManager->createQuery('SELECT * FROM competidor WHERE id IN (SELECT id_competidor FROM competicaocompetidor WHERE id_competicao = '.$id.' )');
+            $competidores  = $query->execute();
+
+
         }
 
     }

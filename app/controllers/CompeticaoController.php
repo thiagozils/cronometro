@@ -250,7 +250,7 @@ class CompeticaoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("competicao was deleted successfully");
+        $this->flash->success("Competição deletada com sucesso!");
 
         $this->dispatcher->forward([
             'controller' => "competicao",
@@ -277,9 +277,9 @@ class CompeticaoController extends ControllerBase
 
             $this->view->competicao = $competicao;
 
-            $query = $this->modelsManager->createQuery('SELECT * FROM competidor WHERE id IN (SELECT id_competidor FROM competicaocompetidor WHERE id_competicao = '.$id.' )');
+            $query = $this->modelsManager->createQuery('SELECT * FROM competidor WHERE competidor.id IN (SELECT competicaocompetidor.id_competidor FROM competicaocompetidor WHERE competicaocompetidor.id_competicao = '.$id.' )');
             $competidores  = $query->execute();
-
+            $this->view->competidores = $competidores ;
 
         }
 

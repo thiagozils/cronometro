@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Mvc\Model\Relation;
 class Competidor extends \Phalcon\Mvc\Model
 {
 
@@ -22,8 +23,10 @@ class Competidor extends \Phalcon\Mvc\Model
     {
         $this->setSchema("cronometro");
         $this->setSource("competidor");
-        $this->hasMany('id', 'CompeticaoCompetidor', 'id_competidor', ['alias' => 'CompeticaoCompetidor']);
-        $this->hasMany('id', 'Volta', 'id_competidor', ['alias' => 'Volta']);
+        $this->hasMany('id', 'CompeticaoCompetidor', 'id_competidor', ['alias' => 'CompeticaoCompetidor','foreignKey' => [
+            'action' => Relation::ACTION_CASCADE]]);
+        $this->hasMany('id', 'Volta', 'id_competidor', ['alias' => 'Volta','foreignKey' => [
+            'action' => Relation::ACTION_CASCADE]]);
     }
 
     /**

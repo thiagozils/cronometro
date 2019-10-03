@@ -1,8 +1,9 @@
 <?php
 
+use Phalcon\Mvc\Model\Relation;
 class Competicao extends \Phalcon\Mvc\Model
-{
 
+{
     /**
      *
      * @var integer
@@ -34,8 +35,10 @@ class Competicao extends \Phalcon\Mvc\Model
     {
         $this->setSchema("cronometro");
         $this->setSource("competicao");
-        $this->hasMany('id', 'CompeticaoCompetidor', 'id_competicao', ['alias' => 'CompeticaoCompetidor']);
-        $this->hasMany('id', 'Volta', 'id_competicao', ['alias' => 'Volta']);
+        $this->hasMany('id', 'CompeticaoCompetidor', 'id_competicao', ['alias' => 'CompeticaoCompetidor','foreignKey' => [
+            'action' => Relation::ACTION_CASCADE]]);
+        $this->hasMany('id', 'Volta', 'id_competicao', ['alias' => 'Volta','foreignKey' => [
+            'action' => Relation::ACTION_CASCADE]]);
     }
 
     /**

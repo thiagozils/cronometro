@@ -7,4 +7,4 @@ CREATE TABLE Volta (
     data DATETIME NOT NULL,
     FOREIGN KEY (id_competicao) REFERENCES Competicao(id),
     FOREIGN KEY (id_competidor) REFERENCES Competidor(id)
-);
+)ENGINE = innodb;

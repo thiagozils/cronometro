@@ -3,4 +3,4 @@ CREATE TABLE Competicao (
     nome varchar (70) NOT NULL,
     descricao VARCHAR(550) NOT NULL,
     data DATETIME NOT NULL
-);
+) ENGINE = innodb;

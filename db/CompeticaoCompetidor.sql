@@ -4,4 +4,4 @@ CREATE TABLE CompeticaoCompetidor (
     FOREIGN KEY (id_competicao) REFERENCES Competicao(id),
     FOREIGN KEY (id_competidor) REFERENCES Competidor(id),
     PRIMARY KEY(id_competicao, id_competidor)
-);
+)ENGINE = innodb;

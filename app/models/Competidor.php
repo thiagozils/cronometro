@@ -8,7 +8,7 @@ class Competidor extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $id;
+    public $id; 
 
     /**
      *

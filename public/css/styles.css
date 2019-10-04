@@ -411,3 +411,84 @@ color: #525151;
   word-break: break-all;
   background-color: #1d1f20;
 }
+
+.alert{
+  font-weight: bold;
+  color: #FFFFFF;
+  border-radius: 10px;
+}
+
+.alert-success{
+  background: rgb(11,226,50);
+  background: linear-gradient(90deg, rgba(11,226,50,1) 0%, rgba(35,255,153,1) 40%, rgba(0,255,205,1) 100%);
+}
+
+.alert-danger{
+  background: rgb(226,11,11);
+  background: linear-gradient(90deg, rgba(226,11,11,1) 0%, rgba(255,98,35,1) 35%, rgba(255,0,108,1) 100%);
+}
+
+.alert-info{
+  background: rgb(25,11,226);
+  background: linear-gradient(90deg, rgba(25,11,226,1) 0%, rgba(35,232,255,1) 40%, rgba(255,0,211,1) 100%);
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

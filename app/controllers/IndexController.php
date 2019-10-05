@@ -10,7 +10,8 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-
+        $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
+        $this->view->competicao = $competicao ;
     }
 
 }

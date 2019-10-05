@@ -472,7 +472,8 @@ color: #525151;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background: rgb(124,226,11);
+  background: linear-gradient(349deg, rgba(124,226,11,1) 0%, rgba(154,255,35,1) 47%, rgba(102,203,114,1) 100%);
 }
 
 input:focus + .slider {

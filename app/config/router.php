@@ -15,4 +15,11 @@ $router->add("/competicao/details/{id}", array(
     'action' => 'details'
 ));
 
+$router->add("/competicao/activate", array(
+    'controller' => 'competicao',
+    'action' => 'activate'
+));
+
+
+
 $router->handle();

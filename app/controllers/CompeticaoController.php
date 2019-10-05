@@ -111,7 +111,7 @@ class CompeticaoController extends ControllerBase
         $competicao = new Competicao();
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
-
+        $competicao->ativa = $this->request->getPost("ativa");
         $competidor = $this->request->getPost("competidores");
         $competidores = explode(",", $competidor);
 
@@ -187,6 +187,7 @@ class CompeticaoController extends ControllerBase
 
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
+        $competicao->ativa = $this->request->getPost("ativa");
         
         //CONVERTE A DATA PARA O FORMATO CORRETO
         $dateString = $this->request->getPost("data") . ":00";   
@@ -286,5 +287,43 @@ class CompeticaoController extends ControllerBase
     }
 
 
+
+    public function activateAction()
+    {
+
+        $this->view->disable();
+
+        if($this->request->isPost() == true) 
+        {
+            if($this->request->isAjax() == true) 
+            {              
+                $id = $this->request->getPost("id");
+                $competicao = Competicao::findFirstByid($id);
+                $competicao->ativa = $this->request->getPost("ativa");
+                
+                //Para permitir uma competição ativa por vez
+                $query = $this->modelsManager->createQuery('UPDATE competicao SET competicao.ativa = 0');
+                $query->execute();
+                
+                if (!$competicao->save()) {
+                    foreach ($competicao->getMessages() as $message) {
+                        $this->flash->error($message);
+                    }
+                }
+
+
+            }
+        }
+        else
+        {
+            $this->response->setStatusCode(404, "Not Found");
+        }
+    }
+
+
 }
+
+
+
+
 

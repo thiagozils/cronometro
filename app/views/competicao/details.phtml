@@ -4,7 +4,31 @@
  */
 ?>
 
- 
+
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+ $("#form").on("submit", function(e)
+  {
+    e.preventDefault();
+    $.post("<?php echo $this->url->get('competicao/activate') ?>", $(this).serialize() , function(data)
+    {
+          //   console.log(data);
+          ;
+      }).done(function() { 
+
+         // alert("cool");
+          ;
+      }).fail(function() {
+
+          alert("Erro!"); 
+      })
+  })
+})
+
+</script>
+
 <div class="jumbotron">
 
 
@@ -18,15 +42,29 @@
     <p><?php echo $competicao->descricao ?></p>
   </div>
   <div class="container">
-    <h4> Iniciar </h4>
-    <label class="switch">
-      <input type="checkbox" name="competicaoativa">
-      <span class="slider round"></span>
+    <h4> Iniciar </h4> 
+    <label class="switch" >
+      <input type="checkbox" id="togBtn" name="ativa">
+      <span class="slider round" ></span>
     </label>
+
+
+    <?php 
+    echo $this->tag->form(
+        array(
+            "competicao/activate", "method" => "post", "id" => "form"
+        )
+    ); 
+    ?>
+        <input type="hidden" value="<?php echo $competicao->id ?>" name="id" id="fieldId">
+        <input type="hidden" value="<?php echo $competicao->ativa ?>" name="ativa" id="fieldAtiva">
+    <?php echo $this->tag->endForm(); ?>
+
+
   </div>
 
   <div class="container">
-<h2> Competidores </h2>
+<h2> Competidores </h2> 
     <ul class="list-group">
     <?php foreach ($competidores as $competidor): ?>
       <li class="list-group-item"><?php echo $competidor->nome ?></li>
@@ -40,7 +78,6 @@
     <?php echo $this->tag->linkTo(["competicao/edit/" . $competicao->id, "Editar", "class" => "btn btn-primary"]); ?>
     <?php echo $this->tag->linkTo(["competicao/delete/" . $competicao->id, "Deletar", "class" => "btn btn-primary"]); ?>
 </div>
-
 </div>
 
 
@@ -52,3 +89,23 @@
 <?php echo $this->getContent(); ?>
 
 
+
+
+<script>
+
+    if ($("#fieldAtiva").val() == 1){
+      $("#togBtn").prop('checked', true);
+    }else{
+      $("#togBtn").prop('checked', false);
+    }
+
+    $("#togBtn").click(function() {
+      if($(this).is(":checked")) 
+      {
+        $("#fieldAtiva").val(1);
+      }else{
+        $("#fieldAtiva").val(0);
+      }
+      $( "form" ).first().submit();
+  });
+ </script>

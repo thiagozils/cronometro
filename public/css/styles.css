@@ -67,7 +67,7 @@ display: none;
 
 .sidebar-nav {
   position: absolute;
-  top: 0;
+  top: 20px;
   width: 220px;
   margin: 0;
   padding: 0;

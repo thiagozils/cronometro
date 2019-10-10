@@ -2,10 +2,34 @@
  
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
+use Phalcon\Events\Event;
+use Phalcon\Exception;
+use Phalcon\Http\Request;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\User\Plugin;
 
 
 class VoltaController extends ControllerBase
 {
+
+
+    public function beforeExecuteRoute(Dispatcher $dispatcher)
+    {
+        $contentType = $this->request->getHeader('CONTENT_TYPE');
+        switch ($contentType) {
+            case 'application/json':
+            case 'application/json;charset=UTF-8':
+                $jsonRawBody = $this->request->getJsonRawBody(true);
+                if ($this->request->getRawBody() && !$jsonRawBody) {
+                    throw new Exception("Invalid JSON syntax");
+                }
+                $_POST = $jsonRawBody;
+                break;
+        }
+    }
+
+
+
     /**
      * Index action
      */
@@ -109,14 +133,14 @@ class VoltaController extends ControllerBase
             return;
         }
 
-        $volta = new Volta();
-        $volta->idCompeticao = $this->request->getPost("id_competicao");
-        $volta->idCompetidor = $this->request->getPost("id_competidor");
-        $volta->valida = $this->request->getPost("valida");
-        $volta->tempo = $this->request->getPost("tempo");
-        $volta->data = $this->request->getPost("data");
+  
+            $volta = new Volta();
+            $volta->idCompeticao = $this->request->getPost("id_competicao");
+            $volta->idCompetidor = $this->request->getPost("id_competidor");
+            $volta->valida = $this->request->getPost("valida");
+            $volta->tempo = $this->request->getPost("tempo");
+            $volta->data = $this->request->getPost("data");
         
-
         if (!$volta->save()) {
             foreach ($volta->getMessages() as $message) {
                 $this->flash->error($message);

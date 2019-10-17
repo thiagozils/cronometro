@@ -98,4 +98,11 @@ class Competicao extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+
+    public static function getActive($parameters = null)
+    {
+        return parent::findFirst($parameters);
+    }
+
+
 }

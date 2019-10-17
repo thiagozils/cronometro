@@ -55,15 +55,29 @@ class CompetidorController extends ControllerBase
     }
 
 
-    public function searchJsonAction()
+    //Manda para o arduino o próximo competidor da competição ativa
+    public function nextAction()
     {
-        $competidor = Competidor::find();
+        $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
+        $ccomp = CompeticaoCompetidor::find(['conditions' => 'id_competicao = '.$competicao->id]);
+        $id_competidor = 0;
+        foreach ($ccomp as $cc){
+            
+            $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id , 'id_competidor = '.$cc->id_competidor]);
+            $result = count($volta);
+            if ($result <= 0){
+                $id_competidor = $cc->id_competidor;
+                break;
+            }
+        }
+
+           
+        $competidor = Competidor::findFirstByid($id_competidor);
         $this->response->setContentType('application/json', 'UTF-8');
         return $this->response
         ->setHeader('Content-Type', 'application/json')
-        ->setJsonContent($competidor->toArray(),JSON_PRETTY_PRINT, 512)
+        ->setJsonContent($competidor,JSON_PRETTY_PRINT, 512)
         ->send();
-        //echo json_encode(Competidor::find($parameters)->toArray(), JSON_NUMERIC_CHECK);
     }
 
 

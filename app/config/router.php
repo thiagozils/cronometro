@@ -5,9 +5,9 @@ $router = $di->getRouter();
 // Define your routes here
 
 // default
-$router->add("/competidor/searchJson", array(
+$router->add("/competidor/next", array(
     'controller' => 'competidor',
-    'action' => 'searchjson'
+    'action' => 'next'
 ));
 
 $router->add("/competicao/details/{id}", array(

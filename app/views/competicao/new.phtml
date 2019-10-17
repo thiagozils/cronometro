@@ -93,6 +93,20 @@ $( document ).ready(function() {
         <?php echo $this->tag->TextArea(["descricao", "size" => 250, "class" => "form-control", "id" => "fieldDescricao"]) ?>
 </div>
 
+<div class="form-inline" style="margin-bottom:10px;">
+
+  <div class="form-group">
+    <label for="fieldTomadas" class="col-2 col-form-label">Tomadas</label>
+    <input class="form-control" type="number"  id="fieldTomadas" name="tomadas">
+  </div>
+
+  <div class="form-group mx-sm-3" style="margin-left:20px;">
+    <label for="fieldTentativas" class="col-2 col-form-label">Tentativas</label>
+    <input class="form-control" type="number" id="fieldTentativas" name="tentativas">
+  </div>
+
+  </div>
+
 <div class="form-group">
     <label for="fieldData" >Data e Horário</label>
     <?php echo $this->tag->textField(["data", "size" => 30, "class" => "form-control", "id" => "fieldData"]) ?>

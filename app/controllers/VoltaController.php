@@ -7,7 +7,7 @@ use Phalcon\Exception;
 use Phalcon\Http\Request;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\User\Plugin;
-
+use Cronometro\Models;
 
 class VoltaController extends ControllerBase
 {
@@ -15,10 +15,13 @@ class VoltaController extends ControllerBase
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
+
+        
         $contentType = $this->request->getHeader('CONTENT_TYPE');
         switch ($contentType) {
             case 'application/json':
             case 'application/json;charset=UTF-8':
+                
                 $jsonRawBody = $this->request->getJsonRawBody(true);
                 if ($this->request->getRawBody() && !$jsonRawBody) {
                     throw new Exception("Invalid JSON syntax");
@@ -133,13 +136,34 @@ class VoltaController extends ControllerBase
             return;
         }
 
+        
+
+        $id_competidor = $this->request->getPost("id_competidor");
+        $id_competicao= $this->request->getPost("id_competicao");
+        $count = $this->db->fetchOne('SELECT COUNT(*) AS total FROM volta where volta.id_competicao = '. $id_competicao .' and volta.id_competidor = ' .$id_competidor);
+
+        if ($count["total"] > 2){
+            $this->flash->error("Não é permitido mais do que 3 voltas por competidor! total: ".$count["total"]);
+        }else{
+
   
             $volta = new Volta();
-            $volta->idCompeticao = $this->request->getPost("id_competicao");
-            $volta->idCompetidor = $this->request->getPost("id_competidor");
+            //Busca dos ids
+           // $competidor = Competidor::findFirst($this->request->getPost("id_competidor"));
+            //$competicao = Competicao::findFirst($this->request->getPost("id_competicao"));
+            $volta->id_competicao = $this->request->getPost("id_competicao");
+            $volta->id_competidor = $this->request->getPost("id_competidor");
             $volta->valida = $this->request->getPost("valida");
             $volta->tempo = $this->request->getPost("tempo");
-            $volta->data = $this->request->getPost("data");
+
+
+            //CONVERTE A DATA PARA O FORMATO CORRETO
+            $dateString = $this->request->getPost("data") . ":00";   
+            $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
+            $newdate = $myDateTime->format('Y/m/d H:i:s');
+            $volta->data = $newdate;
+
+
         
         if (!$volta->save()) {
             foreach ($volta->getMessages() as $message) {
@@ -150,7 +174,7 @@ class VoltaController extends ControllerBase
                 'controller' => "volta",
                 'action' => 'new'
             ]);
-
+        }
             return;
         }
 

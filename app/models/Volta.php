@@ -33,6 +33,21 @@ class Volta extends \Phalcon\Mvc\Model
      */
     public $tempo;
 
+
+    /**
+     *
+     * @var integer
+     */
+
+    public $tomada;
+
+        /**
+     *
+     * @var integer
+     */
+
+    public $tentativa;
+
     /**
      *
      * @var string

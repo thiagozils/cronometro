@@ -29,6 +29,24 @@ class Competicao extends \Phalcon\Mvc\Model
 
     public $ativa;
 
+
+    /**
+     *
+     * @var integer
+     */
+
+    public $tomadas;
+
+        /**
+     *
+     * @var integer
+     */
+
+    public $tentativas;
+
+
+
+
     /**
      *
      * @var string

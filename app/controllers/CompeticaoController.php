@@ -111,6 +111,8 @@ class CompeticaoController extends ControllerBase
         $competicao = new Competicao();
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
+        $competicao->tomadas = $this->request->getPost("tomadas");
+        $competicao->tentativas = $this->request->getPost("tentativas");
         $competicao->ativa = $this->request->getPost("ativa");
         $competidor = $this->request->getPost("competidores");
         $competidores = explode(",", $competidor);

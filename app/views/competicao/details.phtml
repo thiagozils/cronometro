@@ -40,13 +40,19 @@ $(document).ready(function()
     <h1><b><?php echo $competicao->nome ?></b></h1>
     <p><b>Data: </b><?php echo $competicao->data ?></p>
     <p><?php echo $competicao->descricao ?></p>
+    <p>  <b>Tomadas:</b> <?php echo $competicao->tomadas ?> <b>Tentativas:</b> <?php echo $competicao->tentativas ?></p>
+
   </div>
+
+
+
   <div class="container">
     <h4> Iniciar </h4> 
     <label class="switch" >
       <input type="checkbox" id="togBtn" name="ativa">
       <span class="slider round" ></span>
     </label>
+
 
 
     <?php 

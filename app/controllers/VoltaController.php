@@ -140,10 +140,12 @@ class VoltaController extends ControllerBase
 
         $id_competidor = $this->request->getPost("id_competidor");
         $id_competicao= $this->request->getPost("id_competicao");
-        $count = $this->db->fetchOne('SELECT COUNT(*) AS total FROM volta where volta.id_competicao = '. $id_competicao .' and volta.id_competidor = ' .$id_competidor);
-
-        if ($count["total"] > 2){
-            $this->flash->error("Não é permitido mais do que 3 voltas por competidor! total: ".$count["total"]);
+        $competicao = Competicao::findFirstByid($id_competicao);
+        $tomada = $this->request->getPost("tomada");
+        $tentativa = $this->request->getPost("tentativa");
+        if ($tentativa > $competicao->tentativas){
+            $this->flash->error("Não é permitido mais voltas.");
+            return;
         }else{
 
   
@@ -155,7 +157,8 @@ class VoltaController extends ControllerBase
             $volta->id_competidor = $this->request->getPost("id_competidor");
             $volta->valida = $this->request->getPost("valida");
             $volta->tempo = $this->request->getPost("tempo");
-
+            $volta->tentativa = $tentativa;
+            $volta->tomada = $tomada;
 
             //CONVERTE A DATA PARA O FORMATO CORRETO
             $dateString = $this->request->getPost("data") . ":00";   

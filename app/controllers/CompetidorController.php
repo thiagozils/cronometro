@@ -62,15 +62,16 @@ class CompetidorController extends ControllerBase
         $ccomp = CompeticaoCompetidor::find(['conditions' => 'id_competicao = '.$competicao->id]);
         $id_competidor = 0;
         foreach ($ccomp as $cc){
-            
-            $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id , 'id_competidor = '.$cc->id_competidor]);
-            $result = count($volta);
-            if ($result <= 0){
-                $id_competidor = $cc->id_competidor;
-                break;
+            for ($i = 1; $i <= $competicao->tomadas; $i++) {
+                $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id , 'id_competidor = '.$cc->id_competidor , 'tomada = '.$i]);
+                $result = count($volta);
+                if ($result <= 0){
+                    $id_competidor = $cc->id_competidor;
+                    break;
+                }
             }
-        }
 
+        }
            
         $competidor = Competidor::findFirstByid($id_competidor);
         $this->response->setContentType('application/json', 'UTF-8');

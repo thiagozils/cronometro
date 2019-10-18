@@ -24,7 +24,6 @@ $(window).on("load resize ", function() {
 
 
 
-
 <div class="row">
 
 
@@ -34,11 +33,11 @@ $(window).on("load resize ", function() {
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
         <tr>
+         <th>Posição (s)</th>
           <th>Competidor</th>
-          <th>1° Tempo (s)</th>
-          <th>2º Tempo (s)</th>
-          <th>3º Tempo (s)</th>
-          <th>Posição (s)</th>
+          <th>Tempo </th>
+          <th>Tomada</th>
+          <th>Tentativa</th>
         </tr>
       </thead>
     </table>
@@ -46,27 +45,34 @@ $(window).on("load resize ", function() {
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
+
+      <!-- foreach competidor -->
+      <!-- <tr> -->
+      <!--   <td>colocação</td> -->
+
+      <?php foreach ($voltas as $volta): ?>
+      <!--   <td>tempo<td> -->
+      <!-- endforeach -->
+      <!-- </tr> -->
+      <!-- endforeach -->
+
+      <?php foreach ($volta as $vol): ?>
+
         <tr>
-          <td>AAC</td>
-          <td>AUSTRALIAN COMPANY </td>
-          <td>$1.38</td>
-          <td>+2.01</td>
           <td><span class="badge badge-primary">1º</span></td>
+          <td><?php echo $vol->competidor->nome ?></td>
+          <td><?php echo $vol->tempo ?> </td>
+          <td><?php echo $vol->tomada ?></td>
+          <td><?php echo $vol->tentativa ?></td>
+          
         </tr>
-        <tr>
-          <td>AAD</td>
-          <td>AUSENCO</td>
-          <td>$2.38</td>
-          <td>-0.01</td>
-          <td><span class="badge badge-secondary">2º</span></td>
-        </tr>
-        <tr>
-          <td>AAX</td>
-          <td>ADELAIDE</td>
-          <td>$3.22</td>
-          <td>+0.01</td>
-          <td><span class="badge badge-third">3º</span></td>
-        </tr>
+
+        <?php endforeach;  ?>
+
+        <?php endforeach;  ?>
+
+
+
       </tbody>
     </table>
   </div>

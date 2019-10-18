@@ -1,4 +1,5 @@
 <?php
+use Phalcon\Mvc\Model\Relation;
 
 class Volta extends \Phalcon\Mvc\Model
 {

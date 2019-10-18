@@ -4,12 +4,7 @@
  */
 ?>
 
-<script>
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-</script>
+
 
 
 
@@ -20,63 +15,49 @@ $(window).on("load resize ", function() {
 </div>
 
 
+<?php echo $this->getContent() ?>
 
+<table class="table table-striped table-bordered table-list">
 
-
-
-<div class="row">
-
-
-
-<section>
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
-         <th>Posição (s)</th>
-          <th>Competidor</th>
-          <th>Tempo </th>
-          <th>Tomada</th>
-          <th>Tentativa</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tbody>
-
+<thead>
+<tr>
+  <th>Posição (s)</th>
+  <th>Competidor</th>
+    <?php
+        for ($i = 1; $i <= $competicao->tomadas; $i++) {
+          echo "<th colspan='".$competicao->tentativas."'>Tomada " .$i."</th>";
+        }
+  ?>
+</tr>
+ </thead>
+ <tbody>
       <!-- foreach competidor -->
       <!-- <tr> -->
       <!--   <td>colocação</td> -->
-
       <?php foreach ($voltas as $volta): ?>
       <!--   <td>tempo<td> -->
       <!-- endforeach -->
       <!-- </tr> -->
       <!-- endforeach -->
-
       <?php foreach ($volta as $vol): ?>
-
         <tr>
           <td><span class="badge badge-primary">1º</span></td>
           <td><?php echo $vol->competidor->nome ?></td>
-          <td><?php echo $vol->tempo ?> </td>
-          <td><?php echo $vol->tomada ?></td>
-          <td><?php echo $vol->tentativa ?></td>
-          
+          <?php $countVoltas = 0;?>
+          <?php foreach ($volta as $compvolta): ?>
+            <td><?php echo $compvolta->tempo ?> </td>
+            <?php $countVoltas++; ?>
+        <?php endforeach;  ?>
+          <?php
+                for ($i = $countVoltas ; $i< ($competicao->tomadas * $competicao->tentativas); $i++ ){
+                    echo "<td> 0 </td>";
+                }
+          ?>
+          <?php break;?>
         </tr>
 
         <?php endforeach;  ?>
 
         <?php endforeach;  ?>
-
-
-
-      </tbody>
-    </table>
-  </div>
-</section>
-</div>
-
-<?php echo $this->getContent() ?>
+</tbody>
+</table>

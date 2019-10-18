@@ -150,9 +150,6 @@ class VoltaController extends ControllerBase
 
   
             $volta = new Volta();
-            //Busca dos ids
-           // $competidor = Competidor::findFirst($this->request->getPost("id_competidor"));
-            //$competicao = Competicao::findFirst($this->request->getPost("id_competicao"));
             $volta->id_competicao = $this->request->getPost("id_competicao");
             $volta->id_competidor = $this->request->getPost("id_competidor");
             $volta->valida = $this->request->getPost("valida");
@@ -165,8 +162,6 @@ class VoltaController extends ControllerBase
             $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
             $newdate = $myDateTime->format('Y/m/d H:i:s');
             $volta->data = $newdate;
-
-
         
         if (!$volta->save()) {
             foreach ($volta->getMessages() as $message) {

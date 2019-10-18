@@ -4,15 +4,51 @@
  */
 ?>
 
+<script>
+
+$(document).ready(function(){
+
+    const interval = setInterval(function() {
+      location.reload();
+   }, 30000);
+});
+
+
+</script>
+
+
 
 
 
 
 <div class="jumbotron">
-  <div class="container">
-      <h2 class="header-title"><?php echo $competicao->nome;?></h2>
+
+
+
+  <span class="b"> 
+     <div class="container" style="display: inline-block;">
+      <h2 class="index-title"><?php echo $competicao->nome;?></h2>
+      <hr class="hr-index"/>
   </div>
+</span> 
+  
+  <span class="b">
+  <div class="container" style="display: inline-block;">
+     <p><b>Descrição:</b> <?php echo $competicao->descricao;?></p>
+     <p><b>Data: </b><?php echo $competicao->data;?></p>
+  </div>
+  </span>
+
+
 </div>
+
+
+
+
+
+
+
+
 
 
 <?php echo $this->getContent() ?>
@@ -21,11 +57,11 @@
 
 <thead>
 <tr>
-  <th>Posição (s)</th>
-  <th>Competidor</th>
+  <th scope="col">Posição (s)</th>
+  <th scope="col">Competidor</th>
     <?php
         for ($i = 1; $i <= $competicao->tomadas; $i++) {
-          echo "<th colspan='".$competicao->tentativas."'>Tomada " .$i."</th>";
+          echo "<th scope='col' colspan='".$competicao->tentativas."'>Tomada " .$i."</th>";
         }
   ?>
 </tr>
@@ -34,6 +70,7 @@
       <!-- foreach competidor -->
       <!-- <tr> -->
       <!--   <td>colocação</td> -->
+      <?php $countPosition = 1;?>
       <?php foreach ($voltas as $volta): ?>
       <!--   <td>tempo<td> -->
       <!-- endforeach -->
@@ -41,7 +78,11 @@
       <!-- endforeach -->
       <?php foreach ($volta as $vol): ?>
         <tr>
-          <td><span class="badge badge-primary">1º</span></td>
+          <td><span class="badge badge-primary">
+           <?php echo $countPosition;?>º
+          </span></td>
+
+
           <td><?php echo $vol->competidor->nome ?></td>
           <?php $countVoltas = 0;?>
           <?php foreach ($volta as $compvolta): ?>
@@ -57,7 +98,7 @@
         </tr>
 
         <?php endforeach;  ?>
-
+        <?php $countPosition++;?>
         <?php endforeach;  ?>
 </tbody>
 </table>

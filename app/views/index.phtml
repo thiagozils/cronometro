@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
         <?php 
               $this->assets->addCss('public/css/multi-select.css'); 
-              $this->assets->addCss('/public/css/styles.css');
+              $this->assets->addCss('public/css/styles.css');
               $this->assets->addJs('public/js/script.js');
               $this->assets->addJs('public/js/jquery.mask.min.js');
               $this->assets->addJs('public/js/jquery.multi-select.js');
@@ -39,7 +39,7 @@
                         ]
                     );?>
                 </li>
-                <li>
+                <li style="margin-top:20px;">
                     <?php echo Phalcon\Tag::linkTo(
                         [
                             "competicao",

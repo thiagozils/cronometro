@@ -90,7 +90,8 @@ class CompeticaoController extends ControllerBase
             $this->tag->setDefault("nome", $competicao->nome);
             $this->tag->setDefault("descricao", $competicao->descricao);
             $this->tag->setDefault("data", $competicao->data);
-            
+            $this->tag->setDefault("tentativas", $competicao->tentativas);
+            $this->tag->setDefault("tomadas", $competicao->tomadas);
         }
     }
 

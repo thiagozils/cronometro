@@ -53,6 +53,14 @@ $(document).ready(function(){
 
 <?php echo $this->getContent() ?>
 
+
+<?php 
+if ($voltas == 0){
+  echo "<div class='alert alert-info' role='alert'>
+          Nenhuma volta até o momento!
+        </div";
+}else{
+?>
 <table class="table table-striped table-bordered table-list">
 
 <thead>
@@ -102,3 +110,4 @@ $(document).ready(function(){
         <?php endforeach;  ?>
 </tbody>
 </table>
+              <?php } ?>

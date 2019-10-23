@@ -430,11 +430,12 @@ color: #525151;
 .alert-danger{
   background: rgb(226,11,11);
   background: linear-gradient(90deg, rgba(226,11,11,1) 0%, rgba(255,98,35,1) 35%, rgba(255,0,108,1) 100%);
+  text-align: center;
 }
 
 .alert-info{
-  background: rgb(25,11,226);
-  background: linear-gradient(90deg, rgba(25,11,226,1) 0%, rgba(35,232,255,1) 40%, rgba(255,0,211,1) 100%);
+  background: rgb(27,54,99);
+  background: linear-gradient(83deg, rgba(27,54,99,1) 6%, rgba(156,51,224,1) 53%);
 }
 
 
@@ -537,5 +538,4 @@ span.b {
 td,th{
   text-align: center;
 }
-
 

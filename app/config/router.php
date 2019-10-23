@@ -20,6 +20,10 @@ $router->add("/competicao/activate", array(
     'action' => 'activate'
 ));
 
+$router->add("/competicao/active", array(
+    'controller' => 'competicao',
+    'action' => 'active'
+));
 
 
 $router->handle();

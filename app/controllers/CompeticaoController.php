@@ -228,6 +228,12 @@ class CompeticaoController extends ControllerBase
     public function deleteAction($id)
     {
         $competicao = Competicao::findFirstByid($id);
+        $competicaocompetidor = Competicaocompetidor::find(['conditions' => 'id_competicao = '.$competicao->id] );
+        $competicaocompetidor->delete();
+        $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id] );
+        $volta->delete();
+
+
         if (!$competicao) {
             $this->flash->error("competicao was not found");
 
@@ -320,6 +326,18 @@ class CompeticaoController extends ControllerBase
         {
             $this->response->setStatusCode(404, "Not Found");
         }
+    }
+
+
+    public function activeAction()
+    {
+        $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
+        $this->response->setContentType('application/json', 'UTF-8');
+        return $this->response
+        ->setHeader('Content-Type', 'application/json')
+        ->setJsonContent($competicao,JSON_PRETTY_PRINT, 512)
+        ->send();
+
     }
 
 

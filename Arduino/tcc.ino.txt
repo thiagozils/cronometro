@@ -1,0 +1,150 @@
+/*
+  Web client
+
+ This sketch connects to a website (http://www.google.com)
+ using an Arduino Wiznet Ethernet shield.
+
+ Circuit:
+ * Ethernet shield attached to pins 10, 11, 12, 13
+
+ created 18 Dec 2009
+ by David A. Mellis
+ modified 9 Apr 2012
+ by Tom Igoe, based on work by Adrian McEwen
+
+ */
+
+#include <SPI.h>
+#include <HttpClient.h>
+#include <Ethernet.h>
+#include <EthernetClient.h>
+#include <ArduinoJson.h>
+
+// Enter a MAC address for your controller below.
+// Newer Ethernet shields have a MAC address printed on a sticker on the shield
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+char server[] = "192.168.0.1";
+
+// Set the static IP address to use if the DHCP fails to assign
+IPAddress ip(192, 168, 0, 177);
+
+EthernetClient client;
+HttpClient http(client);
+
+// Name of the server we want to connect to
+char kHostname[] = "192.168.0.1";
+// Path to download (this is the bit after the hostname in the URL
+// that you want to download
+const char kPath[] = "/phtools/cronometro/competidor/next";
+const char kPath2[] = "/phtools/cronometro/competicao/active";
+
+// Number of milliseconds to wait without receiving any data before we give up
+const int kNetworkTimeout = 30*1000;
+// Number of milliseconds to wait if no data is available before trying again
+const int kNetworkDelay = 1000;
+
+void setup() {
+  // Open serial communications and wait for port to open:
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+
+  Ethernet.begin(mac, ip);
+  Serial.print("Local IP: ");
+  Serial.println(Ethernet.localIP());
+}
+
+void loop() {
+   
+  const size_t capacity = JSON_OBJECT_SIZE(2);
+   DynamicJsonDocument doc = getHttp(capacity,kPath); ;
+
+
+  /*
+   Serial.print("Proximo competidor: ");
+  char* root_0_id = doc["id"]; // "1"
+  char* root_0_nome = doc["nome"]; // "Thiago Andrey Zils"
+  Serial.print("ID: ");
+  Serial.println(root_0_id);
+  Serial.print("Nome: ");
+  Serial.println(root_0_nome);
+
+  */
+
+  // And just stop, now that we've tried a download
+  while(1);
+}
+
+
+DynamicJsonDocument getHttp (size_t capacity,char path[]){
+
+  int err = 0;
+  char c[capacity];
+  unsigned long timeoutStart = millis();
+  
+
+   err = http.get(kHostname, kPath);
+ 
+  if (err == 0)
+  {
+    Serial.println("startedRequest ok");
+
+    err = http.responseStatusCode();
+    if (err >= 0)
+    {
+      Serial.print("Got status code: ");
+      Serial.println(err);
+      
+      err = http.skipResponseHeaders();
+      if (err >= 0)
+      {
+        while ( (http.connected() || http.available()) &&
+               ((millis() - timeoutStart) < kNetworkTimeout) )
+        {
+            if (http.available())
+            {
+                http.read(c, capacity);               
+                timeoutStart = millis();
+                
+            }
+            else
+            {
+                delay(kNetworkDelay);
+            }
+        }
+      }
+      else
+      {
+        Serial.print("Failed to skip response headers: ");
+        Serial.println(err);
+      }
+    }
+    else
+    {    
+      Serial.print("Getting response failed: ");
+      Serial.println(err);
+    }
+  }
+  else
+  {
+    Serial.print("Connect failed: ");
+    Serial.println(err);
+  }
+  
+  http.stop();
+
+  DynamicJsonDocument doc(capacity);
+  DeserializationError error = deserializeJson(doc, c);
+  
+  // Test if parsing succeeds.
+  if (error) {
+    Serial.print(F("deserializeJson() failed: "));
+    Serial.println(error.c_str());
+    return;
+  }
+
+  return doc;
+}
+
+

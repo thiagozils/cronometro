@@ -425,6 +425,7 @@ color: #525151;
 .alert-success{
   background: rgb(11,226,50);
   background: linear-gradient(90deg, rgba(11,226,50,1) 0%, rgba(35,255,153,1) 40%, rgba(0,255,205,1) 100%);
+  text-align: center;
 }
 
 .alert-danger{
@@ -436,6 +437,7 @@ color: #525151;
 .alert-info{
   background: rgb(27,54,99);
   background: linear-gradient(83deg, rgba(27,54,99,1) 6%, rgba(156,51,224,1) 53%);
+  text-align: center;
 }
 
 
@@ -539,3 +541,29 @@ td,th{
   text-align: center;
 }
 
+.fa-3x {
+  font-size: 280px;
+  margin-top:-3px;
+  text-align: center;
+  background: rgb(179,10,10);
+  background: linear-gradient(221deg, rgba(179,10,10,1) 27%, rgba(217,152,10,1) 92%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+  
+  .fa-3x:hover{
+    background: rgb(237,116,23);
+    background: linear-gradient(230deg, rgba(237,116,23,1) 36%, rgba(161,12,12,1) 82%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  .divIndex{
+    text-align: center;
+    margin:2px;
+  }
+
+  #text{
+    font-size: 5em;
+  }

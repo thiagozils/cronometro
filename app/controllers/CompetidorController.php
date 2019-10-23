@@ -35,7 +35,7 @@ class CompetidorController extends ControllerBase
 
         $competidor = Competidor::find($parameters);
         if (count($competidor) == 0) {
-            $this->flash->notice("The search did not find any competidor");
+            $this->flash->notice("A busca não retornou nenhum competidor :C");
 
             $this->dispatcher->forward([
                 "controller" => "competidor",
@@ -105,7 +105,7 @@ class CompetidorController extends ControllerBase
 
             $competidor = Competidor::findFirstByid($id);
             if (!$competidor) {
-                $this->flash->error("competidor was not found");
+                $this->flash->error("Competidor não encontrado");
 
                 $this->dispatcher->forward([
                     'controller' => "competidor",
@@ -154,7 +154,7 @@ class CompetidorController extends ControllerBase
             return;
         }
 
-        $this->flash->success("competidor was created successfully");
+        $this->flash->success("Competidor criado com sucesso!");
 
         $this->dispatcher->forward([
             'controller' => "competidor",
@@ -182,7 +182,7 @@ class CompetidorController extends ControllerBase
         $competidor = Competidor::findFirstByid($id);
 
         if (!$competidor) {
-            $this->flash->error("competidor does not exist " . $id);
+            $this->flash->error("Competidor não existe: " . $id);
 
             $this->dispatcher->forward([
                 'controller' => "competidor",
@@ -210,7 +210,7 @@ class CompetidorController extends ControllerBase
             return;
         }
 
-        $this->flash->success("competidor was updated successfully");
+        $this->flash->success("Competidor editado com sucesso.");
 
         $this->dispatcher->forward([
             'controller' => "competidor",
@@ -227,7 +227,7 @@ class CompetidorController extends ControllerBase
     {
         $competidor = Competidor::findFirstByid($id);
         if (!$competidor) {
-            $this->flash->error("competidor was not found");
+            $this->flash->error("Competidor não encontrado.");
 
             $this->dispatcher->forward([
                 'controller' => "competidor",
@@ -251,7 +251,7 @@ class CompetidorController extends ControllerBase
             return;
         }
 
-        $this->flash->success("competidor was deleted successfully");
+        $this->flash->success("Competidor excluido.");
 
         $this->dispatcher->forward([
             'controller' => "competidor",

@@ -21,6 +21,8 @@ $(document).ready(function(){
 
 
 
+<?php if ($active == 1){ ?>
+
 <div class="jumbotron">
 
 
@@ -110,4 +112,15 @@ if ($voltas == 0){
         <?php endforeach;  ?>
 </tbody>
 </table>
-              <?php } ?>
+        <?php } }else{?>
+        
+
+          <div class="row divIndex">
+            <i class="fa fa-clock-o fa-3x"> </i>
+            <p id="text">CRONÔMETRO IOT</p>
+            <small><code>Thiago A. Zils  (C) 2019</code> </small>
+          </div>
+
+
+
+        <?php } ?>

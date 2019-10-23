@@ -259,7 +259,7 @@ class CompeticaoController extends ControllerBase
 
 
         if (!$competicao) {
-            $this->flash->error("competicao was not found");
+            $this->flash->error("Competição não encontrada!");
 
             $this->dispatcher->forward([
                 'controller' => "competicao",

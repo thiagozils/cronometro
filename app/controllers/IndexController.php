@@ -11,6 +11,9 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
         $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
+        $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $competicao->data);
+        $newdate = $myDateTime->format('d/m/Y H:i:s');
+        $competicao->data = $newdate;
         $this->view->competicao = $competicao ;
 
         $query = $this->modelsManager->createQuery('SELECT DISTINCT volta.id_competidor from volta where volta.id_competicao ='.$competicao->id . ' ORDER by volta.tempo asc');

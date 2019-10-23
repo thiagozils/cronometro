@@ -85,13 +85,19 @@ class CompeticaoController extends ControllerBase
             }
 
             $this->view->id = $competicao->id;
+            $this->view->competicao = $competicao;
 
             $this->tag->setDefault("id", $competicao->id);
             $this->tag->setDefault("nome", $competicao->nome);
             $this->tag->setDefault("descricao", $competicao->descricao);
-            $this->tag->setDefault("data", $competicao->data);
-            $this->tag->setDefault("tentativas", $competicao->tentativas);
-            $this->tag->setDefault("tomadas", $competicao->tomadas);
+            $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $competicao->data);
+            $newdate = $myDateTime->format('d/m/Y H:i:s');
+            $this->tag->setDefault("data",$newdate );
+            $this->tag->setDefault("tentativas",intval($competicao->tentativas));
+            $this->tag->setDefault("tomadas", intval($competicao->tomadas));
+
+            $competidores = Competidor::find();
+            $this->view->competidores = $competidores;
         }
     }
 
@@ -191,12 +197,25 @@ class CompeticaoController extends ControllerBase
         $competicao->nome = $this->request->getPost("nome");
         $competicao->descricao = $this->request->getPost("descricao");
         $competicao->ativa = $this->request->getPost("ativa");
-        
+        $competicao->tomadas = $this->request->getPost("tomadas");
+        $competicao->tentativas = $this->request->getPost("tentativas");
+        $competidor = $this->request->getPost("competidores");
+        $competidores = explode(",", $competidor);
+
         //CONVERTE A DATA PARA O FORMATO CORRETO
         $dateString = $this->request->getPost("data") . ":00";   
         $myDateTime = DateTime::createFromFormat('d/m/Y H:i:s', $dateString);
         $newdate = $myDateTime->format('Y/m/d H:i:s');
         $competicao->data = $newdate;
+
+        $competicao->competicaocompetidor->delete();
+        foreach ($competidores as &$value) {
+            $compc = new Competicaocompetidor();
+            $compc->id_competicao = $competicao->id;
+            $compc->id_competidor = $value;
+            $compc->save();
+        }
+
                        
         if (!$competicao->save()) {
 
@@ -212,8 +231,12 @@ class CompeticaoController extends ControllerBase
 
             return;
         }
+        
 
-        $this->flash->success("competicao was updated successfully");
+
+
+
+        $this->flash->success("Competição atualizada com sucesso!");
 
         $this->dispatcher->forward([
             'controller' => "competicao",
@@ -284,6 +307,10 @@ class CompeticaoController extends ControllerBase
 
                 return;
             }
+
+            $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $competicao->data);
+            $newdate = $myDateTime->format('d/m/Y H:i:s');
+            $competicao->data = $newdate;
 
             $this->view->competicao = $competicao;
 

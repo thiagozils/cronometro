@@ -82,7 +82,7 @@ $( document ).ready(function() {
         ]
     );
 ?>
-
+<?php echo $this->tag->hiddenField("id") ?>
 <div class="form-group">
     <label for="fieldNome">Nome</label>
         <?php echo $this->tag->textField(["nome", "size" => 30, "class" => "form-control", "id" => "fieldNome"]) ?>
@@ -93,19 +93,19 @@ $( document ).ready(function() {
         <?php echo $this->tag->TextArea(["descricao", "size" => 250, "class" => "form-control", "id" => "fieldDescricao"]) ?>
 </div>
 
-<div class="form-inline" style="margin-bottom:10px;">
+
 
   <div class="form-group">
     <label for="fieldTomadas" class="col-2 col-form-label">Tomadas</label>
-    <input class="form-control" type="number"  id="fieldTomadas" name="tomadas">
+    <input class="form-control" type="number" value="<?php echo $competicao->tomadas;?>"  id="fieldTomadas" name="tomadas">
   </div>
 
-  <div class="form-group mx-sm-3" style="margin-left:20px;">
+  <div class="form-group">
     <label for="fieldTentativas" class="col-2 col-form-label">Tentativas</label>
-    <input class="form-control" type="number" id="fieldTentativas" name="tentativas">
+    <input class="form-control" type="number" value="<?php echo $competicao->tentativas;?>" id="fieldTentativas" name="tentativas">
   </div>
 
-  </div>
+
 
 <div class="form-group">
     <label for="fieldData" >Data e Horário</label>
@@ -116,12 +116,39 @@ $( document ).ready(function() {
     <label for="my-select[]" >Competidores</label>
     <select multiple="multiple" id='custom-headers'  class="searchable">
         <?php foreach ($competidores as $competidor): ?>
+
+
+          <?php 
+          $verify = 0;
+          foreach ($competicao->competicaocompetidor as $cc){
+              if ($cc->id_competidor == $competidor->id){
+                $verify = 1;
+              }
+          }
+          
+          if ($verify == 1){ ?>
+          <option value="<?php echo $competidor->id ?>" selected><?php echo $competidor->nome ?></option>
+
+
+          <?php  $comps = $comps.$competidor->id ."," ?>
+
+          <?php }else{ ?>
             <option value="<?php echo $competidor->id ?>"><?php echo $competidor->nome ?></option>
+          <?php } ?>
+
+        
+
+
+
+            
+
+
+
         <?php endforeach; ?>
     </select>
 </div>
 
-    <input type="hidden" value="" name="competidores" id="competidores">
+    <input type="hidden" value="<?php echo $comps; ?>" name="competidores" id="competidores">
     <input type="hidden" value="0" name="ativa" id="fieldAtiva">
 <div class="form-group">
     <?php echo $this->tag->submitButton(["Salvar", "class" => "btn btn-primary btn-lg"]) ?>

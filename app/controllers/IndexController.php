@@ -12,8 +12,7 @@ class IndexController extends ControllerBase
     {
         $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
 
-
-        if (! ($competicao == new Competicao())){
+        if (is_object($competicao)){
             $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $competicao->data);
             $newdate = $myDateTime->format('d/m/Y H:i:s');
             $competicao->data = $newdate;

@@ -125,7 +125,7 @@ $( document ).ready(function() {
                 $verify = 1;
               }
           }
-          
+          $comps = "";
           if ($verify == 1){ ?>
           <option value="<?php echo $competidor->id ?>" selected><?php echo $competidor->nome ?></option>
 
@@ -148,7 +148,8 @@ $( document ).ready(function() {
     </select>
 </div>
 
-    <input type="hidden" value="<?php echo $comps; ?>" name="competidores" id="competidores">
+    <input type="hidden" value="<?php if ($comps != ""){ echo $comps;} ?>" name="competidores" id="competidores">
+
     <input type="hidden" value="0" name="ativa" id="fieldAtiva">
 <div class="form-group">
     <?php echo $this->tag->submitButton(["Salvar", "class" => "btn btn-primary btn-lg"]) ?>

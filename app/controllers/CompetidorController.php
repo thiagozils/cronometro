@@ -77,7 +77,7 @@ class CompetidorController extends ControllerBase
         $this->response->setContentType('application/json', 'UTF-8');
         return $this->response
         ->setHeader('Content-Type', 'application/json')
-        ->setJsonContent($competidor,JSON_PRETTY_PRINT, 512)
+        ->setJsonContent(array('id' => $competidor->id))
         ->send();
     }
 

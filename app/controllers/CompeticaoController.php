@@ -363,7 +363,7 @@ class CompeticaoController extends ControllerBase
         $this->response->setContentType('application/json', 'UTF-8');
         return $this->response
         ->setHeader('Content-Type', 'application/json')
-        ->setJsonContent(array('id' => $competicao->id))
+        ->setJsonContent(array(['id' => $competicao->id,"tentativas" => $competicao->tentativas, "tomadas" => $competicao->tomadas]))
         ->send();
 
     }

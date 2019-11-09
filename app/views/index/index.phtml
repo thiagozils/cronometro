@@ -96,7 +96,13 @@ if ($voltas == 0){
           <td><?php echo $vol->competidor->nome ?></td>
           <?php $countVoltas = 0;?>
           <?php foreach ($volta as $compvolta): ?>
-            <td><?php echo $compvolta->tempo ?> </td>
+            <td style="<?php if ($compvolta->valida == 0){
+                echo "color:#ccc;";
+              }?>">
+              
+            <?php echo $compvolta->tempo ?> 
+          
+          </td>
             <?php $countVoltas++; ?>
         <?php endforeach;  ?>
           <?php

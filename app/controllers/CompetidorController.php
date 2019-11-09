@@ -61,23 +61,42 @@ class CompetidorController extends ControllerBase
         $competicao  = Competicao::findFirst(['conditions' => 'ativa = 1']);
         $ccomp = CompeticaoCompetidor::find(['conditions' => 'id_competicao = '.$competicao->id]);
         $id_competidor = 0;
+
+        //descobre que tomada está
+
+        $tomada = 1;
+        $confer = 0;
         foreach ($ccomp as $cc){
-            for ($i = 1; $i <= $competicao->tomadas; $i++) {
-                $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id , 'id_competidor = '.$cc->id_competidor , 'tomada = '.$i]);
+                $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id .' and id_competidor = '.$cc->id_competidor .' and tomada = '.$tomada]);
                 $result = count($volta);
-                if ($result <= 0){
+                if ($result < $competicao->tentativas ){
+                    $tomada = 1;
+                }else{
+                    if (($tomada+1) <= $competicao->tomadas ){
+                        $confer = 1;
+                    }
+                }
+        }
+
+        if ($confer == 1){
+            $tomada++;
+        }
+        $tentativa = 0;
+        foreach ($ccomp as $cc){
+                $volta = Volta::find(['conditions' => 'id_competicao = '.$competicao->id . ' and id_competidor = '.$cc->id_competidor  .' and tomada = '.$tomada]);
+                $result = count($volta);
+                if ($result  < $competicao->tentativas){
+                    $tentativa = $result+1;
                     $id_competidor = $cc->id_competidor;
                     break;
                 }
             }
 
-        }
-           
         $competidor = Competidor::findFirstByid($id_competidor);
         $this->response->setContentType('application/json', 'UTF-8');
         return $this->response
         ->setHeader('Content-Type', 'application/json')
-        ->setJsonContent(array('id' => $competidor->id))
+        ->setJsonContent(array('id' => $competidor->id, 'tomada' => $tomada, 'tentativa' => $tentativa ))
         ->send();
     }
 

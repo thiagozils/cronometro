@@ -285,4 +285,37 @@ class VoltaController extends ControllerBase
         ]);
     }
 
+
+    public function createurlAction()
+    { 
+        $id_competicao = $_GET['id_competicao']; 
+        $competicao = Competicao::findFirstByid($id_competicao);
+        $tomada = $_GET['tomada']; 
+        $tentativa = $_GET['tentativa'];  
+        if ($tentativa > $competicao->tentativas){
+            $this->flash->error("Não é permitido mais voltas.");
+            return;
+        }else{
+        
+        $volta = new Volta();
+        $volta->id_competicao = $_GET['id_competicao']; 
+        $volta->id_competidor = $_GET['id_competidor'];;
+        $volta->valida = $_GET['valida']; 
+        $volta->tempo =  $_GET['tempo']; 
+        $volta->tentativa = $tentativa;
+        $volta->tomada = $tomada;
+
+        //CONVERTE A DATA PARA O FORMATO CORRETO
+        $newdate = date('Y/m/d H:i:s', time());
+        $volta->data = $newdate;
+    
+        if (!$volta->save()) {
+            foreach ($volta->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+         }
+
+    }
+}
+
 }

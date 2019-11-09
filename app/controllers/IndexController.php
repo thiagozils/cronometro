@@ -18,7 +18,7 @@ class IndexController extends ControllerBase
             $competicao->data = $newdate;
             $this->view->competicao = $competicao ;
             $this->view->active = 1;
-            $query = $this->modelsManager->createQuery('SELECT DISTINCT volta.id_competidor from volta where volta.id_competicao ='.$competicao->id . ' ORDER by volta.tempo asc');
+            $query = $this->modelsManager->createQuery('SELECT DISTINCT volta.id_competidor from volta where volta.id_competicao ='.$competicao->id . ' and volta.valida = 1 ORDER by volta.tempo asc');
             $cc  = $query->execute();
             $voltaFinal = [];
             foreach ($cc as $compc){

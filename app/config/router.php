@@ -25,5 +25,9 @@ $router->add("/competicao/active", array(
     'action' => 'active'
 ));
 
+$router->add("/volta/createurl", array(
+    'controller' => 'volta',
+    'action' => 'createurl'
+));
 
 $router->handle();

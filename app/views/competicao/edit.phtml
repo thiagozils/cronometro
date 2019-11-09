@@ -115,7 +115,9 @@ $( document ).ready(function() {
 <div class="form-group">
     <label for="my-select[]" >Competidores</label>
     <select multiple="multiple" id='custom-headers'  class="searchable">
-        <?php foreach ($competidores as $competidor): ?>
+        <?php
+        $values ="";
+        foreach ($competidores as $competidor): ?>
 
 
           <?php 
@@ -127,7 +129,7 @@ $( document ).ready(function() {
           }
           $comps = "";
           if ($verify == 1){ ?>
-          <option value="<?php echo $competidor->id ?>" selected><?php echo $competidor->nome ?></option>
+          <option value="<?php echo $competidor->id; $values = $values . $competidor->id . ","; ?>" selected><?php echo $competidor->nome ?></option>
 
 
           <?php  $comps = $comps.$competidor->id ."," ?>
@@ -148,7 +150,7 @@ $( document ).ready(function() {
     </select>
 </div>
 
-    <input type="hidden" value="<?php if ($comps != ""){ echo $comps;} ?>" name="competidores" id="competidores">
+    <input type="hidden" value="<?php  echo $values ?>" name="competidores" id="competidores">
 
     <input type="hidden" value="0" name="ativa" id="fieldAtiva">
 <div class="form-group">

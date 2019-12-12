@@ -245,6 +245,12 @@ class CompetidorController extends ControllerBase
     public function deleteAction($id)
     {
         $competidor = Competidor::findFirstByid($id);
+        $competicaocompetidor = Competicaocompetidor::find(['conditions' => 'id_competidor = '.$competidor->id] );
+        $competicaocompetidor->delete();
+        $volta = Volta::find(['conditions' => 'id_competidor = '.$competidor->id] );
+        $volta->delete();
+
+
         if (!$competidor) {
             $this->flash->error("Competidor não encontrado.");
 

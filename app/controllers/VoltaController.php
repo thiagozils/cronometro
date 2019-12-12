@@ -15,8 +15,6 @@ class VoltaController extends ControllerBase
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-
-        
         $contentType = $this->request->getHeader('CONTENT_TYPE');
         switch ($contentType) {
             case 'application/json':

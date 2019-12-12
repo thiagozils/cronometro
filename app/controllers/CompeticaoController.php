@@ -368,7 +368,6 @@ class CompeticaoController extends ControllerBase
         ->setHeader('Content-Type', 'application/json')
         ->setJsonContent(array(['id' => $competicao->id,"tentativas" => $competicao->tentativas, "tomadas" => $competicao->tomadas]))
         ->send();
-
     }
 
 
